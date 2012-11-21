@@ -8,12 +8,20 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Configuration;
 
 namespace MD5Verifier
 {
     public partial class MainForm : Form
     {
-        const string DEF_errLogFileName = "__MD5Errors.log";
+
+        public string LogFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["LogFileName"];
+            }
+        }
         
         delegate void StringParameterDelegate(string value);
         delegate void IntParameterDelegate(int finished, int total);
@@ -73,7 +81,7 @@ namespace MD5Verifier
             this.AppendNewLineToOutput("");
 
 
-            string errLogPath = Path.Combine(path, DEF_errLogFileName);
+            string errLogPath = Path.Combine(path, this.LogFileName);
 
             if (!File.Exists(errLogPath))
             {
