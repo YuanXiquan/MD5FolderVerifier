@@ -4,17 +4,50 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace MD5Verifier
 {
     class MD5ChecksumVerifier
     {
-        const string DEF_logFileName = "__MD5CheckSumList.md5log";
-        
+        #region Class Properties
+        /// <summary>
+        /// Current Directory
+        /// </summary>
         public string CurrentDirectory { get; private set; }
+        /// <summary>
+        /// Parent Form
+        /// </summary>
         public MainForm ParentForm { get; private set; }
+        /// <summary>
+        /// The number of total folders
+        /// </summary>
         public int TotalFolders { get; private set; }
-        public int FinishedFolders { get; private set; } 
+        /// <summary>
+        /// The number of finished verified folders
+        /// </summary>
+        public int FinishedFolders { get; private set; }
+        /// <summary>
+        /// The name of Checksum file
+        /// </summary>
+        public string CheckSumFileName
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["CheckSumFileName"];
+            }
+        }
+        /// <summary>
+        /// The extensions not included inside verification
+        /// </summary>
+        public string IgnoredExtensions
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["IgnoredExtensions"];
+            }
+        }
+        #endregion
 
         public MD5ChecksumVerifier(MainForm form)
         {
@@ -74,7 +107,7 @@ namespace MD5Verifier
         /// <param name="path"></param>
         private void VerifyMd5ForFiles(string path)
         {
-            string MD5LogPath = Path.Combine(path, DEF_logFileName);
+            string MD5LogPath = Path.Combine(path, this.CheckSumFileName);
 
             if (!File.Exists(MD5LogPath))
             {
@@ -103,7 +136,7 @@ namespace MD5Verifier
             foreach (string each in files)
             {
                 // dont process any md5 file
-                if (Path.GetExtension(each) == ".md5log")
+                if (Path.GetExtension(each).Contains(this.IgnoredExtensions))
                 {
                     continue;
                 }
@@ -134,7 +167,7 @@ namespace MD5Verifier
         /// <returns></returns>
         private bool GenerateMd5ForFiles(string path)
         {
-            string MD5LogPath = Path.Combine(path, DEF_logFileName);
+            string MD5LogPath = Path.Combine(path, this.CheckSumFileName);
 
             if (!File.Exists(MD5LogPath))
             {
