@@ -13,7 +13,7 @@ namespace MD5Verifier
 {
     public partial class MainForm : Form
     {
-        const string DEF_errLogFileName = "__MD5Errors.md5log";
+        const string DEF_errLogFileName = "__MD5Errors.log";
         
         delegate void StringParameterDelegate(string value);
         delegate void IntParameterDelegate(int finished, int total);
