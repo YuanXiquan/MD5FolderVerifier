@@ -10,7 +10,7 @@ using System.IO;
 using System.Threading;
 using System.Configuration;
 
-namespace MD5Verifier
+namespace MD5FolderVerifier
 {
     public partial class MainForm : Form
     {
@@ -51,7 +51,7 @@ namespace MD5Verifier
             this.ClearStatus();
             string path = this.WorkingPathTextBox.Text;
             this.Verifier.SetCurrentDirectory(path);
-            this.AppendNewLineToOutput("Start Verify");
+            this.AppendNormalMsg("Start Verify");
             
             this.VerifierThread = new Thread(new ThreadStart(this.Verifier.Verify));
             this.VerifierThread.Start();
@@ -77,8 +77,8 @@ namespace MD5Verifier
                 return;
             }
 
-            this.AppendNewLineToOutput("Verify Finished");
-            this.AppendNewLineToOutput("");
+            this.AppendNormalMsg("Verify Finished");
+            this.AppendNormalMsg("");
 
 
             string errLogPath = Path.Combine(path, this.LogFileName);
@@ -101,25 +101,25 @@ namespace MD5Verifier
 
             foreach (string each in this.ErrorLog)
             {
-                this.AppendNewLineToOutput(each);
+                this.AppendNormalMsg(each);
             }
 
             // enable button
             this.GenerateButton.Enabled = true;
 
             this._counter = 200;
-            this.AppendNewLineToOutput("");
+            this.AppendNormalMsg("");
             OutputTextBox.SelectionStart = OutputTextBox.Text.Length;
             OutputTextBox.ScrollToCaret();
             OutputTextBox.Refresh();
         }
 
-        public void AppendNewLineToOutput(string line)
+        public void AppendNormalMsg(string line)
         {
             if (InvokeRequired)
             {
                 // We're not in the UI thread, so we need to call BeginInvoke
-                BeginInvoke(new StringParameterDelegate(AppendNewLineToOutput), new object[] { line });
+                BeginInvoke(new StringParameterDelegate(AppendNormalMsg), new object[] { line });
                 return;
             }
             
@@ -137,17 +137,17 @@ namespace MD5Verifier
             }
         }
 
-        public void AppendLineToLog(string line)
+        public void AppendErrorMsg(string line)
         {
             if (InvokeRequired)
             {
                 // We're not in the UI thread, so we need to call BeginInvoke
-                BeginInvoke(new StringParameterDelegate(AppendLineToLog), new object[] { line });
+                BeginInvoke(new StringParameterDelegate(AppendErrorMsg), new object[] { line });
                 return;
             }
 
             this.ErrorLog.Add(line);
-            this.AppendNewLineToOutput(line);
+            this.AppendNormalMsg(line);
         }
 
         public void UpdateStatus(int finished, int total)

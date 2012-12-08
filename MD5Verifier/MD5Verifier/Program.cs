@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace MD5Verifier
+namespace MD5FolderVerifier
 {
     static class Program
     {

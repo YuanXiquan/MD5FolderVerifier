@@ -6,7 +6,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Configuration;
 
-namespace MD5Verifier
+namespace MD5FolderVerifier
 {
     class MD5ChecksumVerifier
     {
@@ -38,6 +38,14 @@ namespace MD5Verifier
             }
         }
         /// <summary>
+        /// Running Mode: Console or GUI
+        /// </summary>
+        public RunningMode Mode { get; private set; }
+        /// <summary>
+        /// Log Instance
+        /// </summary>
+        public VerifierLog Log { get; private set; }
+        /// <summary>
         /// The extensions not included inside verification
         /// </summary>
         public string IgnoredExtensions
@@ -49,11 +57,16 @@ namespace MD5Verifier
         }
         #endregion
 
+        #region Class Constructor
         public MD5ChecksumVerifier(MainForm form)
         {
             this.ParentForm = form;
+            this.Mode = RunningMode.GUI;
+            this.Log = new VerifierLog(this.Mode, this.ParentForm);
         }
+        #endregion
 
+        #region Public Methods
         /// <summary>
         /// Set up working Directory
         /// </summary>
@@ -71,7 +84,9 @@ namespace MD5Verifier
             this.VerifyMD5ForDir(this.CurrentDirectory);
             this.ParentForm.GenerateFinished(this.CurrentDirectory);
         }
-        
+        #endregion
+
+        #region Private Methods
         /// <summary>
         /// Generate MD5 for Folders inside a Folder
         /// </summary>
@@ -89,7 +104,7 @@ namespace MD5Verifier
             {
                 if (this.GenerateMd5ForFiles(each))
                 {
-                    this.ParentForm.AppendNewLineToOutput(each + "| success");
+                    this.Log.AppendLog(LogMsgType.Info, each, LogResultType.GenerateSuccess);
                 }
                 else
                 {
@@ -145,15 +160,15 @@ namespace MD5Verifier
 
                 if (!md5Dict.ContainsKey(fileName))
                 {
-                    ParentForm.AppendLineToLog("Error! |" + each + "| Not Found!"); 
+                    this.Log.AppendLog(LogMsgType.Error, each, LogResultType.NotFound);
                 }
                 else if (md5Dict[fileName] != this.GetMD5HashFromFile(each))
                 {
-                    ParentForm.AppendLineToLog("Error! |" + each + "| Checksum dismatch!");
+                    this.Log.AppendLog(LogMsgType.Error, each, LogResultType.Mismatch);
                 }
                 else
                 {
-                    ParentForm.AppendNewLineToOutput("File |" + each + "| Passed");
+                    this.Log.AppendLog(LogMsgType.Info, each, LogResultType.Passed);
                 }
             }
         }
@@ -175,7 +190,7 @@ namespace MD5Verifier
             }
             else
             {
-                this.ParentForm.AppendNewLineToOutput("Warning! |" + MD5LogPath + "| exist");
+                this.Log.AppendLog(LogMsgType.Warning, MD5LogPath, LogResultType.AlreadyExist);
                 return false;
             }
 
@@ -229,6 +244,7 @@ namespace MD5Verifier
             }
             return sb.ToString();
         }
+        #endregion
 
     }
 }

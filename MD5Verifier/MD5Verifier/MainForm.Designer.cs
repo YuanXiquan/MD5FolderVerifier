@@ -1,4 +1,4 @@
-﻿namespace MD5Verifier
+﻿namespace MD5FolderVerifier
 {
     partial class MainForm
     {
