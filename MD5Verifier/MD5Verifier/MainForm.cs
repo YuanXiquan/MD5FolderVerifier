@@ -42,8 +42,19 @@ namespace MD5FolderVerifier
             _sb = new StringBuilder();
             _counter = 0;
 
+            this.WorkingPathTextBox.KeyPress += new KeyPressEventHandler(WorkingPathCheckKeys);
+
             this.InitOutputDataGrid();
         }
+
+        private void WorkingPathCheckKeys(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                this.Generate();
+            }
+        }
+
 
         private void InitOutputDataGrid()
         {
@@ -80,6 +91,11 @@ namespace MD5FolderVerifier
         }
 
         private void GenerateButton_Click(object sender, EventArgs e)
+        {
+            this.Generate();
+        }
+
+        private void Generate()
         {
             this.ClearStatus();
             string path = this.WorkingPathTextBox.Text;
