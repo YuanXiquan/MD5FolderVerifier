@@ -24,12 +24,15 @@ namespace MD5FolderVerifier
         }
         
         delegate void StringParameterDelegate(string value);
+        delegate void LogGridParameterDelegate(string value, LogGrid gridValue);
         delegate void IntParameterDelegate(int finished, int total);
         private MD5ChecksumVerifier Verifier;
         private List<string> ErrorLog;
         private StringBuilder _sb;
         private int _counter;
         private Thread VerifierThread;
+        private BindingList<LogGrid> LogGridList;
+
 
         public MainForm()
         {
@@ -38,6 +41,36 @@ namespace MD5FolderVerifier
             this.ErrorLog = new List<string>();
             _sb = new StringBuilder();
             _counter = 0;
+
+            this.InitOutputDataGrid();
+        }
+
+        private void InitOutputDataGrid()
+        {
+            this.OutputDataGridView.AutoGenerateColumns = false;
+
+            DataGridViewTextBoxColumn typeColumn = new DataGridViewTextBoxColumn();
+            typeColumn.DataPropertyName = "MessageType";
+            typeColumn.HeaderText = "Type";
+            typeColumn.MinimumWidth = 20;
+            typeColumn.Width = 30;
+
+            DataGridViewTextBoxColumn textColumn = new DataGridViewTextBoxColumn();
+            textColumn.DataPropertyName = "MessageText";
+            textColumn.HeaderText = "Message";
+            textColumn.MinimumWidth = 400;
+            textColumn.MinimumWidth = 400;
+
+            DataGridViewTextBoxColumn resultColumn = new DataGridViewTextBoxColumn();
+            resultColumn.DataPropertyName = "MessageResult";
+            resultColumn.HeaderText = "Result";
+
+            this.OutputDataGridView.Columns.Add(typeColumn);
+            this.OutputDataGridView.Columns.Add(textColumn);
+            this.OutputDataGridView.Columns.Add(resultColumn);
+
+            this.LogGridList = new BindingList<LogGrid>();
+            this.OutputDataGridView.DataSource = this.LogGridList;
         }
 
         private void PathSelectButton_Click(object sender, EventArgs e)
@@ -66,6 +99,7 @@ namespace MD5FolderVerifier
             _sb = new StringBuilder();
             _counter = 0;
             this.OutputTextBox.Clear();
+            this.LogGridList.Clear();
         }
 
         public void GenerateFinished(string path)
@@ -137,14 +171,16 @@ namespace MD5FolderVerifier
             }
         }
 
-        public void AppendErrorMsg(string line)
+        public void AppendErrorMsg(string line, LogGrid gridValue)
         {
             if (InvokeRequired)
             {
                 // We're not in the UI thread, so we need to call BeginInvoke
-                BeginInvoke(new StringParameterDelegate(AppendErrorMsg), new object[] { line });
+                BeginInvoke(new LogGridParameterDelegate(AppendErrorMsg), new object[] { line, gridValue });
                 return;
             }
+
+            this.LogGridList.Add(gridValue);
 
             this.ErrorLog.Add(line);
             this.AppendNormalMsg(line);

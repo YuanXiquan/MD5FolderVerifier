@@ -83,7 +83,8 @@ namespace MD5FolderVerifier
             outputStr = msgTypeStr + " | " + msg + " | " + resultTypeStr;
             if(msgType == LogMsgType.Error)
             {
-                this.ParentForm.AppendErrorMsg(outputStr);
+                LogGrid gridValue = new LogGrid(msgTypeStr, msg, resultTypeStr);
+                this.ParentForm.AppendErrorMsg(outputStr, gridValue);
             }
             else
             {
