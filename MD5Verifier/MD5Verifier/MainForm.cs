@@ -42,18 +42,22 @@ namespace MD5FolderVerifier
             _sb = new StringBuilder();
             _counter = 0;
 
-            this.WorkingPathTextBox.KeyPress += new KeyPressEventHandler(WorkingPathCheckKeys);
+            this.WorkingPathTextBox.KeyDown += new KeyEventHandler(WorkingPathCheckKeys);
 
             this.InitOutputDataGrid();
         }
 
-        private void WorkingPathCheckKeys(object sender, KeyPressEventArgs e)
+        private void WorkingPathCheckKeys(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)13)
+            if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
                 this.Generate();
             }
+
         }
+
 
 
         private void InitOutputDataGrid()
