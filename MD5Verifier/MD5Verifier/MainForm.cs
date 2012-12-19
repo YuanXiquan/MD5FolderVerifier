@@ -45,6 +45,8 @@ namespace MD5FolderVerifier
             this.WorkingPathTextBox.KeyDown += new KeyEventHandler(WorkingPathCheckKeys);
 
             this.InitOutputDataGrid();
+
+            this.WorkingPathTextBox.Select();
         }
 
         private void WorkingPathCheckKeys(object sender, KeyEventArgs e)
