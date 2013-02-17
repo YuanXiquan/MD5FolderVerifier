@@ -81,6 +81,7 @@
             this.OutputTextBox.Location = new System.Drawing.Point(3, 3);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
+            this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.OutputTextBox.Size = new System.Drawing.Size(645, 514);
             this.OutputTextBox.TabIndex = 3;
