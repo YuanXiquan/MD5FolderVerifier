@@ -133,31 +133,34 @@ namespace MD5FolderVerifier
                 return;
             }
 
-            this.AppendNormalMsg("Verify Finished");
-            this.AppendNormalMsg("");
-
-
-            string errLogPath = Path.Combine(path, this.LogFileName);
-
-            if (!File.Exists(errLogPath))
+            if (Directory.Exists(path))
             {
-                using (StreamWriter sw = File.CreateText(errLogPath)) { }
-            }
+                this.AppendNormalMsg("Verify Finished");
+                this.AppendNormalMsg("");
 
-            using (StreamWriter sw = File.AppendText(errLogPath))
-            {
-                sw.WriteLine("================================================");
-                sw.WriteLine(DateTime.Now.ToUniversalTime().ToString("u"));
+
+                string errLogPath = Path.Combine(path, this.LogFileName);
+
+                if (!File.Exists(errLogPath))
+                {
+                    using (StreamWriter sw = File.CreateText(errLogPath)) { }
+                }
+
+                using (StreamWriter sw = File.AppendText(errLogPath))
+                {
+                    sw.WriteLine("================================================");
+                    sw.WriteLine(DateTime.Now.ToUniversalTime().ToString("u"));
+
+                    foreach (string each in this.ErrorLog)
+                    {
+                        sw.WriteLine(each);
+                    }
+                }
 
                 foreach (string each in this.ErrorLog)
                 {
-                    sw.WriteLine(each);
+                    this.AppendNormalMsg(each);
                 }
-            }
-
-            foreach (string each in this.ErrorLog)
-            {
-                this.AppendNormalMsg(each);
             }
 
             // enable button
