@@ -91,12 +91,22 @@ namespace MD5FolderVerifier
         /// Generate MD5 for Folders inside a Folder
         /// </summary>
         /// <param name="path"></param>
-        private void VerifyMD5ForDir(string path)
+        private bool VerifyMD5ForDir(string path)
         {
             this.FinishedFolders = 0;
             this.TotalFolders = 0;
-            List<string> dirs = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).ToList();
-            dirs.Add(path);
+            List<string> dirs = null;
+
+            if (Directory.Exists(path))
+            {
+                dirs = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).ToList();
+                dirs.Add(path);
+            }
+            else
+            {
+                this.Log.AppendLog(LogMsgType.Error, "Invalid Working Path", LogResultType.NotFound);
+                return false;
+            }
 
             this.TotalFolders = dirs.Count;
 
@@ -113,7 +123,9 @@ namespace MD5FolderVerifier
                 this.FinishedFolders++;
 
                 this.ParentForm.UpdateStatus(this.FinishedFolders, this.TotalFolders);
-            }       
+            }
+
+            return true;
         }
 
         /// <summary>
