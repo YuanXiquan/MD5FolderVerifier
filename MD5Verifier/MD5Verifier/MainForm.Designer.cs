@@ -179,6 +179,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "MD5 Checksum Verifier";
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.CentreTabControl.ResumeLayout(false);
             this.ConsolePage.ResumeLayout(false);
             this.ConsolePage.PerformLayout();
