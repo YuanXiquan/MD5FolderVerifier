@@ -229,5 +229,12 @@ namespace MD5FolderVerifier
             this.VerifyProgressBar.Maximum = total;
             this.VerifyProgressBar.Value = finished;
         }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            this.WorkingPathTextBox.Select();
+            this.WorkingPathTextBox.SelectAll();
+        }
+
     }
 }
