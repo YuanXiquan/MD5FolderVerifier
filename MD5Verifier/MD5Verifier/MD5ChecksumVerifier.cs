@@ -181,6 +181,8 @@ namespace MD5FolderVerifier
             List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
 
             List<string> resultLines = new List<string>();
+
+            List<string> errorFilePathList = new List<string>();
             
             foreach (string each in files)
             {
@@ -203,13 +205,35 @@ namespace MD5FolderVerifier
                 }
                 else if (md5Dict[fileName] != this.GetMD5HashFromFile(each))
                 {
-                    this.Log.AppendLog(LogMsgType.Error, each, LogResultType.Mismatch);
+                    errorFilePathList.Add(each);
                 }
                 else
                 {
                     this.Log.AppendLog(LogMsgType.Info, each, LogResultType.Passed);
                 }
             }
+
+            // Retry the mismatched files
+            ReTryErrors(ref errorFilePathList, ref md5Dict);
+        }
+
+        /// <summary>
+        /// Retry Error Files
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <param name="md5Dict"></param>
+        private void ReTryErrors(ref List<string> errors, ref Dictionary<string, string> md5Dict)
+        {
+            foreach (string each in errors)
+            {
+                string fileName = Path.GetFileName(each);
+                if (md5Dict[fileName] != this.GetMD5HashFromFile(each))
+                {
+                    this.Log.AppendLog(LogMsgType.Error, each, LogResultType.Mismatch);
+                }
+
+            }
+
         }
 
 
