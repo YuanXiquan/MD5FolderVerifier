@@ -55,6 +55,28 @@ namespace MD5FolderVerifier
                 return ConfigurationManager.AppSettings["IgnoredExtensions"];
             }
         }
+
+        private HashSet<string> _IgnoredSystemFiles = null;
+
+        /// <summary>
+        /// The System Files not included inside verification
+        /// </summary>
+        public HashSet<string> IgnoreedSystemFiles
+        {
+            get
+            {
+                if (_IgnoredSystemFiles == null)
+                {
+                    string systemFileString = ConfigurationManager.AppSettings["IgnoredSystemFiles"];
+                    _IgnoredSystemFiles = new HashSet<string>(systemFileString.Split(';'));
+
+                }
+
+                 return _IgnoredSystemFiles;
+
+            }
+
+        }
         #endregion
 
         #region Class Constructor
@@ -169,6 +191,11 @@ namespace MD5FolderVerifier
                 }
 
                 string fileName = Path.GetFileName(each);
+
+                if (this.IgnoreedSystemFiles.Contains(fileName))
+                {
+                    continue;
+                }
 
                 if (!md5Dict.ContainsKey(fileName))
                 {
