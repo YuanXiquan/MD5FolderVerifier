@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MD5Verifier/MD5Verifier/obj/x64/Release
+/MD5Verifier/MD5Verifier/obj/x64/Debug
+/.vs
+/MD5Verifier/.vs/MD5Verifier/FileContentIndex
+/MD5Verifier/MD5Verifier/bin/x64
