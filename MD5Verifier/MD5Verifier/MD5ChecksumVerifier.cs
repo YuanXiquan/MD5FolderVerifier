@@ -45,14 +45,24 @@ namespace MD5FolderVerifier
         /// Log Instance
         /// </summary>
         public VerifierLog Log { get; private set; }
+
+        private HashSet<string> _IgnoredExtensions = null;
+
         /// <summary>
         /// The extensions not included inside verification
         /// </summary>
-        public string IgnoredExtensions
+        public HashSet<string> IgnoredExtensions
         {
             get
             {
-                return ConfigurationManager.AppSettings["IgnoredExtensions"];
+                if (_IgnoredExtensions == null)
+                {
+                    string extensionStr = ConfigurationManager.AppSettings["IgnoredExtensions"];
+                    _IgnoredExtensions = new HashSet<string>(extensionStr.Split(';'));
+
+                }
+
+                return _IgnoredExtensions;
             }
         }
 
@@ -72,7 +82,7 @@ namespace MD5FolderVerifier
 
                 }
 
-                 return _IgnoredSystemFiles;
+                return _IgnoredSystemFiles;
 
             }
 
@@ -180,14 +190,13 @@ namespace MD5FolderVerifier
 
             List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
 
-            List<string> resultLines = new List<string>();
-
             List<string> errorFilePathList = new List<string>();
             
             foreach (string each in files)
             {
+                Console.WriteLine(Path.GetExtension(each));
                 // dont process any md5 file
-                if (Path.GetExtension(each).Contains(this.IgnoredExtensions))
+                if ( this.IgnoredExtensions.Contains(Path.GetExtension(each)))
                 {
                     continue;
                 }
