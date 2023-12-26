@@ -194,7 +194,6 @@ namespace MD5FolderVerifier
             
             foreach (string each in files)
             {
-                Console.WriteLine(Path.GetExtension(each));
                 // dont process any md5 file
                 if ( this.IgnoredExtensions.Contains(Path.GetExtension(each)))
                 {
