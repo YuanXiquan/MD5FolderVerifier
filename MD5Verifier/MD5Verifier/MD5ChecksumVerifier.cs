@@ -309,7 +309,7 @@ namespace MD5FolderVerifier
                 hashArray = md5.ComputeHash(file);
             }
 
-            return BitConverter.ToString(hashArray).Replace("-", String.Empty).ToLowerInvariant();
+            return BitConverter.ToString(hashArray).Replace("-", string.Empty).ToLowerInvariant();
         }
         #endregion
 
