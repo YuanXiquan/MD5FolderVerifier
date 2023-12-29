@@ -196,7 +196,7 @@ namespace MD5FolderVerifier
             foreach (string each in files)
             {
                 // dont process any md5 file
-                if ( this.IgnoredExtensions.Contains(Path.GetExtension(each)))
+                if (this.IgnoredExtensions.Contains(Path.GetExtension(each)))
                 {
                     continue;
                 }
@@ -273,7 +273,7 @@ namespace MD5FolderVerifier
             foreach (string each in files)
             {
                 // dont process any md5 file
-                if(Path.GetExtension(each) == ".md5log")
+                if(this.IgnoredExtensions.Contains(Path.GetExtension(each)))
                 {
                     continue;
                 }
