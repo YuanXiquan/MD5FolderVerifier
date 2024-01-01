@@ -9,9 +9,11 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Configuration;
+using System.Runtime.Versioning;
 
 namespace MD5FolderVerifier
 {
+    [SupportedOSPlatform("windows")]
     public partial class MainForm : Form
     {
 
@@ -32,7 +34,6 @@ namespace MD5FolderVerifier
         private int _counter;
         private Thread VerifierThread;
         private BindingList<LogGrid> LogGridList;
-
 
         public MainForm()
         {

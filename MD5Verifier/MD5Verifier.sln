@@ -1,35 +1,24 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MD5Verifier", "MD5Verifier\MD5Verifier.csproj", "{9FFDC884-42F9-4268-8416-3AC4036AA36E}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MD5Verifier", "MD5Verifier\MD5Verifier.csproj", "{9FFDC884-42F9-4268-8416-3AC4036AA36E}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs11
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MD5Verifier\\MD5Verifier.csproj
-		SccProjectName1 = MD5Verifier
-		SccLocalPath1 = MD5Verifier
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Debug|x64.ActiveCfg = Debug|x64
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Debug|x64.Build.0 = Debug|x64
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Debug|x86.ActiveCfg = Debug|x86
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Debug|x86.Build.0 = Debug|x86
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Release|x64.ActiveCfg = Release|x64
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Release|x64.Build.0 = Release|x64
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Release|x86.ActiveCfg = Release|x86
-		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Release|x86.Build.0 = Release|x86
+		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FFDC884-42F9-4268-8416-3AC4036AA36E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F9CC074-2AA8-4559-9AF4-66D34EC944ED}
 	EndGlobalSection
 EndGlobal

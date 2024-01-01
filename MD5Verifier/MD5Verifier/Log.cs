@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace MD5FolderVerifier
 {
+    [SupportedOSPlatform("windows")]
     class VerifierLog
     {
         #region Class Properties

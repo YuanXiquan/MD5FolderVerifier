@@ -6,9 +6,11 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Configuration;
 using System.Security.Policy;
+using System.Runtime.Versioning;
 
 namespace MD5FolderVerifier
 {
+    [SupportedOSPlatform("windows")]
     class MD5ChecksumVerifier
     {
         #region Class Properties
@@ -302,7 +304,7 @@ namespace MD5FolderVerifier
         /// <returns></returns>
         private string GetMD5HashFromFile(string fileName)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
+            MD5 md5 = MD5.Create();
             byte[] hashArray;
             using (FileStream file = new FileStream(fileName, FileMode.Open))
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace MD5FolderVerifier
@@ -11,6 +12,7 @@ namespace MD5FolderVerifier
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+        [SupportedOSPlatform("windows")]
         static void Main()
         {
             Application.EnableVisualStyles();
