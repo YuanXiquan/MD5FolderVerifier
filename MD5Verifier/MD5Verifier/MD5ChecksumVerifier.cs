@@ -260,7 +260,7 @@ namespace MD5FolderVerifier
 
             if (!File.Exists(MD5LogPath))
             {
-                using (StreamWriter sw = File.CreateText(MD5LogPath)) { }
+                using StreamWriter sw = File.CreateText(MD5LogPath);
             }
             else
             {
