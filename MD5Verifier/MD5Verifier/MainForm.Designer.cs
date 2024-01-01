@@ -29,166 +29,203 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.WorkingPathLabel = new System.Windows.Forms.Label();
-            this.WorkingPathTextBox = new System.Windows.Forms.TextBox();
-            this.PathSelectButton = new System.Windows.Forms.Button();
-            this.CheckSumFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.OutputTextBox = new System.Windows.Forms.TextBox();
-            this.GenerateButton = new System.Windows.Forms.Button();
-            this.VerifyProgressBar = new System.Windows.Forms.ProgressBar();
-            this.CentreTabControl = new System.Windows.Forms.TabControl();
-            this.ConsolePage = new System.Windows.Forms.TabPage();
-            this.OutputPage = new System.Windows.Forms.TabPage();
-            this.OutputDataGridView = new System.Windows.Forms.DataGridView();
-            this.TopInputPanel = new System.Windows.Forms.Panel();
-            this.CentreTabControl.SuspendLayout();
-            this.ConsolePage.SuspendLayout();
-            this.OutputPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OutputDataGridView)).BeginInit();
-            this.TopInputPanel.SuspendLayout();
-            this.SuspendLayout();
+            WorkingPathLabel = new System.Windows.Forms.Label();
+            WorkingPathTextBox = new System.Windows.Forms.TextBox();
+            PathSelectButton = new System.Windows.Forms.Button();
+            CheckSumFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            OutputTextBox = new System.Windows.Forms.TextBox();
+            GenerateButton = new System.Windows.Forms.Button();
+            VerifyProgressBar = new System.Windows.Forms.ProgressBar();
+            CentreTabControl = new System.Windows.Forms.TabControl();
+            ConsolePage = new System.Windows.Forms.TabPage();
+            OutputPage = new System.Windows.Forms.TabPage();
+            OutputDataGridView = new System.Windows.Forms.DataGridView();
+            TopInputPanel = new System.Windows.Forms.Panel();
+            ThreadNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            NumOfThreadLabel = new System.Windows.Forms.Label();
+            CentreTabControl.SuspendLayout();
+            ConsolePage.SuspendLayout();
+            OutputPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)OutputDataGridView).BeginInit();
+            TopInputPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ThreadNumericUpDown).BeginInit();
+            SuspendLayout();
             // 
             // WorkingPathLabel
             // 
-            this.WorkingPathLabel.AutoSize = true;
-            this.WorkingPathLabel.Location = new System.Drawing.Point(12, 22);
-            this.WorkingPathLabel.Name = "WorkingPathLabel";
-            this.WorkingPathLabel.Size = new System.Drawing.Size(72, 13);
-            this.WorkingPathLabel.TabIndex = 0;
-            this.WorkingPathLabel.Text = "Working Path";
+            WorkingPathLabel.AutoSize = true;
+            WorkingPathLabel.Location = new System.Drawing.Point(16, 31);
+            WorkingPathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            WorkingPathLabel.Name = "WorkingPathLabel";
+            WorkingPathLabel.Size = new System.Drawing.Size(96, 20);
+            WorkingPathLabel.TabIndex = 0;
+            WorkingPathLabel.Text = "Working Path";
             // 
             // WorkingPathTextBox
             // 
-            this.WorkingPathTextBox.Location = new System.Drawing.Point(12, 38);
-            this.WorkingPathTextBox.Name = "WorkingPathTextBox";
-            this.WorkingPathTextBox.Size = new System.Drawing.Size(541, 20);
-            this.WorkingPathTextBox.TabIndex = 1;
+            WorkingPathTextBox.Location = new System.Drawing.Point(16, 70);
+            WorkingPathTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            WorkingPathTextBox.Name = "WorkingPathTextBox";
+            WorkingPathTextBox.Size = new System.Drawing.Size(723, 27);
+            WorkingPathTextBox.TabIndex = 1;
             // 
             // PathSelectButton
             // 
-            this.PathSelectButton.Location = new System.Drawing.Point(568, 35);
-            this.PathSelectButton.Name = "PathSelectButton";
-            this.PathSelectButton.Size = new System.Drawing.Size(75, 23);
-            this.PathSelectButton.TabIndex = 2;
-            this.PathSelectButton.Text = "Path";
-            this.PathSelectButton.UseVisualStyleBackColor = true;
-            this.PathSelectButton.Click += new System.EventHandler(this.PathSelectButton_Click);
+            PathSelectButton.Location = new System.Drawing.Point(757, 66);
+            PathSelectButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            PathSelectButton.Name = "PathSelectButton";
+            PathSelectButton.Size = new System.Drawing.Size(100, 35);
+            PathSelectButton.TabIndex = 2;
+            PathSelectButton.Text = "Path";
+            PathSelectButton.UseVisualStyleBackColor = true;
+            PathSelectButton.Click += PathSelectButton_Click;
             // 
             // OutputTextBox
             // 
-            this.OutputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OutputTextBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OutputTextBox.Location = new System.Drawing.Point(3, 3);
-            this.OutputTextBox.Multiline = true;
-            this.OutputTextBox.Name = "OutputTextBox";
-            this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(645, 514);
-            this.OutputTextBox.TabIndex = 3;
+            OutputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            OutputTextBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            OutputTextBox.Location = new System.Drawing.Point(4, 5);
+            OutputTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            OutputTextBox.Multiline = true;
+            OutputTextBox.Name = "OutputTextBox";
+            OutputTextBox.ReadOnly = true;
+            OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            OutputTextBox.Size = new System.Drawing.Size(863, 797);
+            OutputTextBox.TabIndex = 3;
             // 
             // GenerateButton
             // 
-            this.GenerateButton.Location = new System.Drawing.Point(568, 64);
-            this.GenerateButton.Name = "GenerateButton";
-            this.GenerateButton.Size = new System.Drawing.Size(75, 23);
-            this.GenerateButton.TabIndex = 4;
-            this.GenerateButton.Text = "Generate";
-            this.GenerateButton.UseVisualStyleBackColor = true;
-            this.GenerateButton.Click += new System.EventHandler(this.GenerateButton_Click);
+            GenerateButton.Location = new System.Drawing.Point(757, 107);
+            GenerateButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            GenerateButton.Name = "GenerateButton";
+            GenerateButton.Size = new System.Drawing.Size(100, 35);
+            GenerateButton.TabIndex = 4;
+            GenerateButton.Text = "Generate";
+            GenerateButton.UseVisualStyleBackColor = true;
+            GenerateButton.Click += GenerateButton_Click;
             // 
             // VerifyProgressBar
             // 
-            this.VerifyProgressBar.Location = new System.Drawing.Point(12, 64);
-            this.VerifyProgressBar.Name = "VerifyProgressBar";
-            this.VerifyProgressBar.Size = new System.Drawing.Size(542, 23);
-            this.VerifyProgressBar.TabIndex = 5;
+            VerifyProgressBar.Location = new System.Drawing.Point(16, 107);
+            VerifyProgressBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            VerifyProgressBar.Name = "VerifyProgressBar";
+            VerifyProgressBar.Size = new System.Drawing.Size(723, 35);
+            VerifyProgressBar.TabIndex = 5;
             // 
             // CentreTabControl
             // 
-            this.CentreTabControl.Controls.Add(this.ConsolePage);
-            this.CentreTabControl.Controls.Add(this.OutputPage);
-            this.CentreTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.CentreTabControl.Location = new System.Drawing.Point(0, 116);
-            this.CentreTabControl.Name = "CentreTabControl";
-            this.CentreTabControl.SelectedIndex = 0;
-            this.CentreTabControl.Size = new System.Drawing.Size(659, 546);
-            this.CentreTabControl.TabIndex = 6;
+            CentreTabControl.Controls.Add(ConsolePage);
+            CentreTabControl.Controls.Add(OutputPage);
+            CentreTabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            CentreTabControl.Location = new System.Drawing.Point(0, 178);
+            CentreTabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            CentreTabControl.Name = "CentreTabControl";
+            CentreTabControl.SelectedIndex = 0;
+            CentreTabControl.Size = new System.Drawing.Size(879, 840);
+            CentreTabControl.TabIndex = 6;
             // 
             // ConsolePage
             // 
-            this.ConsolePage.Controls.Add(this.OutputTextBox);
-            this.ConsolePage.Location = new System.Drawing.Point(4, 22);
-            this.ConsolePage.Name = "ConsolePage";
-            this.ConsolePage.Padding = new System.Windows.Forms.Padding(3);
-            this.ConsolePage.Size = new System.Drawing.Size(651, 520);
-            this.ConsolePage.TabIndex = 0;
-            this.ConsolePage.Text = "Console";
-            this.ConsolePage.UseVisualStyleBackColor = true;
+            ConsolePage.Controls.Add(OutputTextBox);
+            ConsolePage.Location = new System.Drawing.Point(4, 29);
+            ConsolePage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            ConsolePage.Name = "ConsolePage";
+            ConsolePage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            ConsolePage.Size = new System.Drawing.Size(871, 807);
+            ConsolePage.TabIndex = 0;
+            ConsolePage.Text = "Console";
+            ConsolePage.UseVisualStyleBackColor = true;
             // 
             // OutputPage
             // 
-            this.OutputPage.Controls.Add(this.OutputDataGridView);
-            this.OutputPage.Location = new System.Drawing.Point(4, 22);
-            this.OutputPage.Name = "OutputPage";
-            this.OutputPage.Padding = new System.Windows.Forms.Padding(3);
-            this.OutputPage.Size = new System.Drawing.Size(651, 520);
-            this.OutputPage.TabIndex = 1;
-            this.OutputPage.Text = "Output";
-            this.OutputPage.UseVisualStyleBackColor = true;
+            OutputPage.Controls.Add(OutputDataGridView);
+            OutputPage.Location = new System.Drawing.Point(4, 29);
+            OutputPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            OutputPage.Name = "OutputPage";
+            OutputPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            OutputPage.Size = new System.Drawing.Size(871, 807);
+            OutputPage.TabIndex = 1;
+            OutputPage.Text = "Output";
+            OutputPage.UseVisualStyleBackColor = true;
             // 
             // OutputDataGridView
             // 
-            this.OutputDataGridView.AllowUserToAddRows = false;
-            this.OutputDataGridView.AllowUserToDeleteRows = false;
-            this.OutputDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.OutputDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.OutputDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OutputDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OutputDataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.OutputDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.OutputDataGridView.Name = "OutputDataGridView";
-            this.OutputDataGridView.ReadOnly = true;
-            this.OutputDataGridView.RowHeadersVisible = false;
-            this.OutputDataGridView.ShowEditingIcon = false;
-            this.OutputDataGridView.Size = new System.Drawing.Size(645, 514);
-            this.OutputDataGridView.TabIndex = 0;
+            OutputDataGridView.AllowUserToAddRows = false;
+            OutputDataGridView.AllowUserToDeleteRows = false;
+            OutputDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            OutputDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            OutputDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            OutputDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            OutputDataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
+            OutputDataGridView.Location = new System.Drawing.Point(4, 5);
+            OutputDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            OutputDataGridView.Name = "OutputDataGridView";
+            OutputDataGridView.ReadOnly = true;
+            OutputDataGridView.RowHeadersVisible = false;
+            OutputDataGridView.RowHeadersWidth = 51;
+            OutputDataGridView.ShowEditingIcon = false;
+            OutputDataGridView.Size = new System.Drawing.Size(863, 797);
+            OutputDataGridView.TabIndex = 0;
             // 
             // TopInputPanel
             // 
-            this.TopInputPanel.Controls.Add(this.WorkingPathTextBox);
-            this.TopInputPanel.Controls.Add(this.VerifyProgressBar);
-            this.TopInputPanel.Controls.Add(this.WorkingPathLabel);
-            this.TopInputPanel.Controls.Add(this.GenerateButton);
-            this.TopInputPanel.Controls.Add(this.PathSelectButton);
-            this.TopInputPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopInputPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopInputPanel.Name = "TopInputPanel";
-            this.TopInputPanel.Size = new System.Drawing.Size(659, 110);
-            this.TopInputPanel.TabIndex = 7;
+            TopInputPanel.Controls.Add(ThreadNumericUpDown);
+            TopInputPanel.Controls.Add(NumOfThreadLabel);
+            TopInputPanel.Controls.Add(WorkingPathTextBox);
+            TopInputPanel.Controls.Add(VerifyProgressBar);
+            TopInputPanel.Controls.Add(WorkingPathLabel);
+            TopInputPanel.Controls.Add(GenerateButton);
+            TopInputPanel.Controls.Add(PathSelectButton);
+            TopInputPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            TopInputPanel.Location = new System.Drawing.Point(0, 0);
+            TopInputPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            TopInputPanel.Name = "TopInputPanel";
+            TopInputPanel.Size = new System.Drawing.Size(879, 168);
+            TopInputPanel.TabIndex = 7;
+            // 
+            // ThreadNumericUpDown
+            // 
+            ThreadNumericUpDown.Location = new System.Drawing.Point(757, 29);
+            ThreadNumericUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            ThreadNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            ThreadNumericUpDown.Name = "ThreadNumericUpDown";
+            ThreadNumericUpDown.Size = new System.Drawing.Size(100, 27);
+            ThreadNumericUpDown.TabIndex = 6;
+            ThreadNumericUpDown.Value = new decimal(new int[] { 4, 0, 0, 0 });
+            // 
+            // NumOfThreadLabel
+            // 
+            NumOfThreadLabel.AutoSize = true;
+            NumOfThreadLabel.Location = new System.Drawing.Point(600, 31);
+            NumOfThreadLabel.Name = "NumOfThreadLabel";
+            NumOfThreadLabel.Size = new System.Drawing.Size(139, 20);
+            NumOfThreadLabel.TabIndex = 0;
+            NumOfThreadLabel.Text = "Number Of Threads";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 662);
-            this.Controls.Add(this.TopInputPanel);
-            this.Controls.Add(this.CentreTabControl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "MainForm";
-            this.Text = "MD5 Checksum Verifier";
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
-            this.CentreTabControl.ResumeLayout(false);
-            this.ConsolePage.ResumeLayout(false);
-            this.ConsolePage.PerformLayout();
-            this.OutputPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.OutputDataGridView)).EndInit();
-            this.TopInputPanel.ResumeLayout(false);
-            this.TopInputPanel.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(879, 1018);
+            Controls.Add(TopInputPanel);
+            Controls.Add(CentreTabControl);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "MainForm";
+            Text = "MD5 Checksum Verifier";
+            Activated += MainForm_Activated;
+            CentreTabControl.ResumeLayout(false);
+            ConsolePage.ResumeLayout(false);
+            ConsolePage.PerformLayout();
+            OutputPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)OutputDataGridView).EndInit();
+            TopInputPanel.ResumeLayout(false);
+            TopInputPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ThreadNumericUpDown).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -205,6 +242,8 @@
         private System.Windows.Forms.TabPage OutputPage;
         private System.Windows.Forms.DataGridView OutputDataGridView;
         private System.Windows.Forms.Panel TopInputPanel;
+        private System.Windows.Forms.Label NumOfThreadLabel;
+        private System.Windows.Forms.NumericUpDown ThreadNumericUpDown;
     }
 }
 

@@ -30,6 +30,10 @@ namespace MD5FolderVerifier
         /// </summary>
         public int FinishedFolders { get; private set; }
         /// <summary>
+        /// The Number of threads used for checksum
+        /// </summary>
+        public int NumOfThreads { get; private set; }
+        /// <summary>
         /// The name of Checksum file
         /// </summary>
         public string CheckSumFileName
@@ -111,6 +115,22 @@ namespace MD5FolderVerifier
         }
 
         /// <summary>
+        /// Set Number of threads
+        /// </summary>
+        /// <param name="number"></param>
+        public void SetNumOfThreads(int number)
+        {
+            if (number >= 1 && number <= 5)
+            {
+                this.NumOfThreads = number;
+            }
+            else
+            {
+                this.NumOfThreads = 1;
+            }
+        }
+
+        /// <summary>
         /// Verify MD5s
         /// </summary>
         public void Verify()
@@ -144,7 +164,7 @@ namespace MD5FolderVerifier
 
             this.TotalFolders = dirs.Count;
 
-            Parallel.ForEach(dirs, new ParallelOptions { MaxDegreeOfParallelism = 4 }, each =>
+            Parallel.ForEach(dirs, new ParallelOptions { MaxDegreeOfParallelism = NumOfThreads }, each =>
             {
                 if (this.GenerateMd5ForFiles(each))
                 {

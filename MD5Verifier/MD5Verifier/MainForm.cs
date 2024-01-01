@@ -106,7 +106,9 @@ namespace MD5FolderVerifier
         {
             this.ClearStatus();
             string path = this.WorkingPathTextBox.Text;
+            int numOfThreads = (int)this.ThreadNumericUpDown.Value;
             this.Verifier.SetCurrentDirectory(path);
+            this.Verifier.SetNumOfThreads(numOfThreads);
             this.AppendNormalMsg("Start Verify");
             
             this.VerifierThread = new Thread(new ThreadStart(this.Verifier.Verify));
