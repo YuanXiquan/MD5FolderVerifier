@@ -42,55 +42,58 @@ namespace MD5FolderVerifier
         /// <param name="resultType">result type</param>
         public void AppendLog(LogMsgType msgType, string msg, LogResultType resultType)
         {
-            string outputStr = "";
-            string msgTypeStr = "";
-            string resultTypeStr = "";
+            lock (this)
+            {
+                string outputStr = "";
+                string msgTypeStr = "";
+                string resultTypeStr = "";
 
-            switch (msgType)
-            {
-                case LogMsgType.Error:
-                    msgTypeStr = "Error";
-                    break;
-                case LogMsgType.Info:
-                    msgTypeStr = "Info";
-                    break;
-                case LogMsgType.Warning:
-                    msgTypeStr = "Warning";
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+                switch (msgType)
+                {
+                    case LogMsgType.Error:
+                        msgTypeStr = "Error";
+                        break;
+                    case LogMsgType.Info:
+                        msgTypeStr = "Info";
+                        break;
+                    case LogMsgType.Warning:
+                        msgTypeStr = "Warning";
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
 
-            switch(resultType)
-            {
-                case LogResultType.AlreadyExist:
-                    resultTypeStr = "Already Exist";
-                    break;
-                case LogResultType.GenerateSuccess:
-                    resultTypeStr = "Generate Success";
-                    break;
-                case LogResultType.Mismatch:
-                    resultTypeStr = "Checksum Mismatch";
-                    break;
-                case LogResultType.NotFound:
-                    resultTypeStr = "Record Not Found";
-                    break;
-                case LogResultType.Passed:
-                    resultTypeStr = "Passed";
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+                switch (resultType)
+                {
+                    case LogResultType.AlreadyExist:
+                        resultTypeStr = "Already Exist";
+                        break;
+                    case LogResultType.GenerateSuccess:
+                        resultTypeStr = "Generate Success";
+                        break;
+                    case LogResultType.Mismatch:
+                        resultTypeStr = "Checksum Mismatch";
+                        break;
+                    case LogResultType.NotFound:
+                        resultTypeStr = "Record Not Found";
+                        break;
+                    case LogResultType.Passed:
+                        resultTypeStr = "Passed";
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
 
-            outputStr = msgTypeStr + " | " + msg + " | " + resultTypeStr;
-            if(msgType == LogMsgType.Error)
-            {
-                LogGrid gridValue = new LogGrid(msgTypeStr, msg, resultTypeStr);
-                this.ParentForm.AppendErrorMsg(outputStr, gridValue);
-            }
-            else
-            {
-                this.ParentForm.AppendNormalMsg(outputStr);
+                outputStr = msgTypeStr + " | " + msg + " | " + resultTypeStr;
+                if (msgType == LogMsgType.Error)
+                {
+                    LogGrid gridValue = new LogGrid(msgTypeStr, msg, resultTypeStr);
+                    this.ParentForm.AppendErrorMsg(outputStr, gridValue);
+                }
+                else
+                {
+                    this.ParentForm.AppendNormalMsg(outputStr);
+                }
             }
         }
         #endregion

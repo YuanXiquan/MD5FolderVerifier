@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Security.Cryptography;
 using System.Configuration;
-using System.Security.Policy;
+using System.IO;
+using System.Linq;
 using System.Runtime.Versioning;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace MD5FolderVerifier
 {
@@ -145,7 +144,7 @@ namespace MD5FolderVerifier
 
             this.TotalFolders = dirs.Count;
 
-            foreach (string each in dirs)
+            Parallel.ForEach(dirs, new ParallelOptions { MaxDegreeOfParallelism = 4 }, each =>
             {
                 if (this.GenerateMd5ForFiles(each))
                 {
@@ -158,10 +157,11 @@ namespace MD5FolderVerifier
                 this.FinishedFolders++;
 
                 this.ParentForm.UpdateStatus(this.FinishedFolders, this.TotalFolders);
-            }
+            });
 
             return true;
         }
+
 
         /// <summary>
         /// Verify MD5 checksum for a file
@@ -194,6 +194,7 @@ namespace MD5FolderVerifier
             List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
 
             List<string> errorFilePathList = [];
+
             
             foreach (string each in files)
             {
