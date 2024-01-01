@@ -214,7 +214,7 @@ namespace MD5FolderVerifier
                 {
                     this.Log.AppendLog(LogMsgType.Error, each, LogResultType.NotFound);
                 }
-                else if (md5Dict[fileName] != this.GetMD5HashFromFile(each))
+                else if (md5Dict[fileName] != GetMD5HashFromFile(each))
                 {
                     errorFilePathList.Add(each);
                 }
@@ -238,7 +238,7 @@ namespace MD5FolderVerifier
             foreach (string each in errors)
             {
                 string fileName = Path.GetFileName(each);
-                if (md5Dict[fileName] != this.GetMD5HashFromFile(each))
+                if (md5Dict[fileName] != GetMD5HashFromFile(each))
                 {
                     this.Log.AppendLog(LogMsgType.Error, each, LogResultType.Mismatch);
                 }
@@ -280,7 +280,7 @@ namespace MD5FolderVerifier
                     continue;
                 }
 
-                resultLines.Add(Path.GetFileName(each) + ":" + this.GetMD5HashFromFile(each));
+                resultLines.Add(Path.GetFileName(each) + ":" + GetMD5HashFromFile(each));
             }
 
             // This text is always added, making the file longer over time
@@ -302,7 +302,7 @@ namespace MD5FolderVerifier
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        private string GetMD5HashFromFile(string fileName)
+        private static string GetMD5HashFromFile(string fileName)
         {
             MD5 md5 = MD5.Create();
             byte[] hashArray;
