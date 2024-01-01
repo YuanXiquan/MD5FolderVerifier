@@ -193,7 +193,7 @@ namespace MD5FolderVerifier
 
             List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
 
-            List<string> errorFilePathList = new List<string>();
+            List<string> errorFilePathList = [];
             
             foreach (string each in files)
             {
