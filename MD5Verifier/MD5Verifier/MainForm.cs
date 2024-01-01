@@ -39,7 +39,7 @@ namespace MD5FolderVerifier
         {
             InitializeComponent();
             this.Verifier = new MD5ChecksumVerifier(this);
-            this.ErrorLog = new List<string>();
+            this.ErrorLog = [];
             _sb = new StringBuilder();
             _counter = 0;
 
@@ -87,7 +87,7 @@ namespace MD5FolderVerifier
             this.OutputDataGridView.Columns.Add(textColumn);
             this.OutputDataGridView.Columns.Add(resultColumn);
 
-            this.LogGridList = new BindingList<LogGrid>();
+            this.LogGridList = [];
             this.OutputDataGridView.DataSource = this.LogGridList;
         }
 
@@ -118,7 +118,7 @@ namespace MD5FolderVerifier
 
         private void ClearStatus()
         {
-            this.ErrorLog = new List<string>();
+            this.ErrorLog = [];
             _sb = new StringBuilder();
             _counter = 0;
             this.OutputTextBox.Clear();

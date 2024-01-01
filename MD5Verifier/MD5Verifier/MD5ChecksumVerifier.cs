@@ -176,7 +176,7 @@ namespace MD5FolderVerifier
                 throw new ArgumentException("Log File doesn't exist:" + MD5LogPath);
             }
 
-            Dictionary<string, string> md5Dict = new Dictionary<string, string>();
+            Dictionary<string, string> md5Dict = [];
             // Open the file to read from.
             using (StreamReader sr = File.OpenText(MD5LogPath))
             {
@@ -271,7 +271,7 @@ namespace MD5FolderVerifier
 
             List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
 
-            List<string> resultLines = new List<string>();
+            List<string> resultLines = [];
 
             foreach (string each in files)
             {
