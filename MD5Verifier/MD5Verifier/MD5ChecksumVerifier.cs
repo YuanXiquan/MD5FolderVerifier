@@ -327,7 +327,7 @@ namespace MD5FolderVerifier
         {
             MD5 md5 = MD5.Create();
             byte[] hashArray;
-            using (FileStream file = new FileStream(fileName, FileMode.Open))
+            using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 hashArray = md5.ComputeHash(file);
             }
