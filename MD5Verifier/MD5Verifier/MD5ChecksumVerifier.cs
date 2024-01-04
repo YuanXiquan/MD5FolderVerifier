@@ -325,13 +325,15 @@ namespace MD5FolderVerifier
         /// <returns></returns>
         private static string GetMD5HashFromFile(string fileName)
         {
-            MD5 md5 = MD5.Create();
             byte[] hashArray;
-            using (FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (MD5 md5 = MD5.Create())
             {
-                hashArray = md5.ComputeHash(file);
-            }
+                using (FileStream file = File.OpenRead(fileName))
+                {
+                    hashArray = md5.ComputeHash(file);
+                }
 
+            } 
             return BitConverter.ToString(hashArray).Replace("-", string.Empty).ToLowerInvariant();
         }
         #endregion
