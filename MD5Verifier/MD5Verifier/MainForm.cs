@@ -17,7 +17,7 @@ namespace MD5FolderVerifier
     public partial class MainForm : Form
     {
 
-        public string LogFileName
+        public string? LogFileName
         {
             get
             {
@@ -32,7 +32,7 @@ namespace MD5FolderVerifier
         private List<string> ErrorLog;
         private StringBuilder _sb;
         private int _counter;
-        private Thread VerifierThread;
+        private Thread? VerifierThread;
         private BindingList<LogGrid> LogGridList;
 
         public MainForm()
@@ -48,9 +48,11 @@ namespace MD5FolderVerifier
             this.InitOutputDataGrid();
 
             this.WorkingPathTextBox.Select();
+
+            this.LogGridList = [];
         }
 
-        private void WorkingPathCheckKeys(object sender, KeyEventArgs e)
+        private void WorkingPathCheckKeys(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -87,7 +89,6 @@ namespace MD5FolderVerifier
             this.OutputDataGridView.Columns.Add(textColumn);
             this.OutputDataGridView.Columns.Add(resultColumn);
 
-            this.LogGridList = [];
             this.OutputDataGridView.DataSource = this.LogGridList;
         }
 
@@ -142,7 +143,7 @@ namespace MD5FolderVerifier
                 this.AppendNormalMsg("");
 
 
-                string errLogPath = Path.Combine(path, this.LogFileName);
+                string errLogPath = Path.Combine(path, this.LogFileName!);
 
                 if (!File.Exists(errLogPath))
                 {

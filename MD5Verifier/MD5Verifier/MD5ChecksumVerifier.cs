@@ -16,7 +16,7 @@ namespace MD5FolderVerifier
         /// <summary>
         /// Current Directory
         /// </summary>
-        public string CurrentDirectory { get; private set; }
+        public string? CurrentDirectory { get; private set; }
         /// <summary>
         /// Parent Form
         /// </summary>
@@ -36,7 +36,7 @@ namespace MD5FolderVerifier
         /// <summary>
         /// The name of Checksum file
         /// </summary>
-        public string CheckSumFileName
+        public string? CheckSumFileName
         {
             get
             {
@@ -52,7 +52,7 @@ namespace MD5FolderVerifier
         /// </summary>
         public VerifierLog Log { get; private set; }
 
-        private HashSet<string> _IgnoredExtensions = null;
+        private HashSet<string>? _IgnoredExtensions = null;
 
         /// <summary>
         /// The extensions not included inside verification
@@ -63,8 +63,8 @@ namespace MD5FolderVerifier
             {
                 if (_IgnoredExtensions == null)
                 {
-                    string extensionStr = ConfigurationManager.AppSettings["IgnoredExtensions"];
-                    _IgnoredExtensions = new HashSet<string>(extensionStr.Split(';'));
+                    string? extensionStr = ConfigurationManager.AppSettings["IgnoredExtensions"];
+                    _IgnoredExtensions = new HashSet<string>(extensionStr!.Split(';'));
 
                 }
 
@@ -72,7 +72,7 @@ namespace MD5FolderVerifier
             }
         }
 
-        private HashSet<string> _IgnoredSystemFiles = null;
+        private HashSet<string>? _IgnoredSystemFiles = null;
 
         /// <summary>
         /// The System Files not included inside verification
@@ -83,8 +83,8 @@ namespace MD5FolderVerifier
             {
                 if (_IgnoredSystemFiles == null)
                 {
-                    string systemFileString = ConfigurationManager.AppSettings["IgnoredSystemFiles"];
-                    _IgnoredSystemFiles = new HashSet<string>(systemFileString.Split(';'));
+                    string? systemFileString = ConfigurationManager.AppSettings["IgnoredSystemFiles"];
+                    _IgnoredSystemFiles = new HashSet<string>(systemFileString!.Split(';'));
 
                 }
 
@@ -135,8 +135,8 @@ namespace MD5FolderVerifier
         /// </summary>
         public void Verify()
         {
-            this.VerifyMD5ForDir(this.CurrentDirectory);
-            this.ParentForm.GenerateFinished(this.CurrentDirectory);
+            this.VerifyMD5ForDir(this.CurrentDirectory!);
+            this.ParentForm.GenerateFinished(this.CurrentDirectory!);
         }
         #endregion
 
@@ -149,7 +149,7 @@ namespace MD5FolderVerifier
         {
             this.FinishedFolders = 0;
             this.TotalFolders = 0;
-            List<string> dirs = null;
+            List<string> dirs;
 
             if (Directory.Exists(path))
             {
@@ -189,7 +189,7 @@ namespace MD5FolderVerifier
         /// <param name="path"></param>
         private void VerifyMd5ForFiles(string path)
         {
-            string MD5LogPath = Path.Combine(path, this.CheckSumFileName);
+            string MD5LogPath = Path.Combine(path, this.CheckSumFileName!);
 
             if (!File.Exists(MD5LogPath))
             {
@@ -200,7 +200,7 @@ namespace MD5FolderVerifier
             // Open the file to read from.
             using (StreamReader sr = File.OpenText(MD5LogPath))
             {
-                string temp = "";
+                string? temp = "";
                 while ((temp = sr.ReadLine()) != null)
                 {
                     if (temp != null && temp != "")
@@ -277,7 +277,7 @@ namespace MD5FolderVerifier
         /// <returns></returns>
         private bool GenerateMd5ForFiles(string path)
         {
-            string MD5LogPath = Path.Combine(path, this.CheckSumFileName);
+            string MD5LogPath = Path.Combine(path, this.CheckSumFileName!);
 
             if (!File.Exists(MD5LogPath))
             {

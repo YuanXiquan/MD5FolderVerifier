@@ -12,7 +12,7 @@ namespace MD5FolderVerifier
         private string MsgText;
         private string MsgResult;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public LogGrid(string msgType, string msgText, string msgResult)
         {
