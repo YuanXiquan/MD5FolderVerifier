@@ -36,7 +36,7 @@ namespace MD5FolderVerifier
         /// <summary>
         /// The name of Checksum file
         /// </summary>
-        public string? CheckSumFileName
+        public static string? CheckSumFileName
         {
             get
             {
@@ -153,7 +153,7 @@ namespace MD5FolderVerifier
 
             if (Directory.Exists(path))
             {
-                dirs = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).ToList();
+                dirs = [.. Directory.GetDirectories(path, "*", SearchOption.AllDirectories)];
                 dirs.Add(path);
             }
             else
@@ -189,7 +189,7 @@ namespace MD5FolderVerifier
         /// <param name="path"></param>
         private void VerifyMd5ForFiles(string path)
         {
-            string MD5LogPath = Path.Combine(path, this.CheckSumFileName!);
+            string MD5LogPath = Path.Combine(path, CheckSumFileName!);
 
             if (!File.Exists(MD5LogPath))
             {
@@ -211,7 +211,7 @@ namespace MD5FolderVerifier
                 }
             }
 
-            List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
+            List<string> files = [.. Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly)];
 
             List<string> errorFilePathList = [];
 
@@ -231,11 +231,11 @@ namespace MD5FolderVerifier
                     continue;
                 }
 
-                if (!md5Dict.ContainsKey(fileName))
+                if (!md5Dict.TryGetValue(fileName, out string? value))
                 {
                     this.Log.AppendLog(LogMsgType.Error, each, LogResultType.NotFound);
                 }
-                else if (md5Dict[fileName] != GetMD5HashFromFile(each))
+                else if (value != GetMD5HashFromFile(each))
                 {
                     errorFilePathList.Add(each);
                 }
@@ -277,7 +277,7 @@ namespace MD5FolderVerifier
         /// <returns></returns>
         private bool GenerateMd5ForFiles(string path)
         {
-            string MD5LogPath = Path.Combine(path, this.CheckSumFileName!);
+            string MD5LogPath = Path.Combine(path, CheckSumFileName!);
 
             if (!File.Exists(MD5LogPath))
             {
@@ -289,7 +289,7 @@ namespace MD5FolderVerifier
                 return false;
             }
 
-            List<string> files = Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly).ToList();
+            List<string> files = [.. Directory.GetFiles(path, "*.*", SearchOption.TopDirectoryOnly)];
 
             List<string> resultLines = [];
 
@@ -328,10 +328,8 @@ namespace MD5FolderVerifier
             byte[] hashArray;
             using (MD5 md5 = MD5.Create())
             {
-                using (FileStream file = File.OpenRead(fileName))
-                {
-                    hashArray = md5.ComputeHash(file);
-                }
+                using FileStream file = File.OpenRead(fileName);
+                hashArray = md5.ComputeHash(file);
 
             } 
             return BitConverter.ToString(hashArray).Replace("-", string.Empty).ToLowerInvariant();
